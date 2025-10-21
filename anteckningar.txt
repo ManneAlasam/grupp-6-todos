@@ -1,0 +1,8 @@
+Implementera uppdatering av todos i todos-projektet från lektion 2.
+ 
+   Man skall nu kunna:
+ 
+   • Markera todos som påbörjade
+   • Markera todos som avklarade
+   • Byta namn/titel på todos
+   • Ändra deadline på todos
