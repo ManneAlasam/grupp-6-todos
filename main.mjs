@@ -153,49 +153,57 @@ function deleteTodo() {
 }
 
 function updateToDo() {
-  //vad vilken index vill vi uppdatera
-  const indexString = readline.question("Vilken todo vill du uppdatera? (ange index): \n");
-  const index = Number.parseInt(indexString);
+  const indexPrompt = readline.question("\nVilken todo vill du uppdatera? (ange index): ");
+  const index = Number.parseInt(indexPrompt);
+
+  if (index < 0 || index >= todos.length) {
+    console.log("Indexen finns inte!");
+    return;
+  }
 
   const todo = todos[index];
 
-  console.log("1. Markera todos som påbörjad");
-  console.log("2. Markera todos som avslutad");
-  console.log("3. Byta namn/titel på todos");
-  console.log("4. Ändra deadline på todos");
-  console.log("5. Avbryt");
+  let validChoice = false;
+  while (!validChoice) {
+    console.log("1. Markera todos som påbörjad");
+    console.log("2. Markera todos som avslutad");
+    console.log("3. Byta namn/titel på todos");
+    console.log("4. Ändra deadline på todos");
+    console.log("5. Avbryt");
 
-  const updateChoice = Number.parseInt(readline.question("\nVälj ett alternativ: "));
+    const updateChoice = Number.parseInt(readline.question("\nVälj ett alternativ: "));
 
-  switch (updateChoice) {
-    case 1: {
-      todo.status = "påbörjad";
-      console.log("Status ändrad till påbörjad");
-      break;
+    switch (updateChoice) {
+      case 1: {
+        todo.status = "Påbörjad";
+        console.log("Status ändrad till påbörjad");
+        break;
+      }
+      case 2: {
+        todo.status = "Avslutad";
+        console.log("Status ändrad till avslutad");
+        break;
+      }
+      case 3: {
+        const updatedTitle = readline.question("\nAnge ett nytt namn: ");
+        todo.title = updatedTitle;
+        console.log(`\nTitle uppdaterad till: ${updatedTitle} `);
+        break;
+      }
+      case 4: {
+        const updatedDeadline = readline.question("\nAnge nytt datum (ÅÅÅÅ-MM-DD): ");
+        const nupdatedDeadlineTime = Date.parse(updatedDeadline);
+        todo.deadline = new Date(updatedDeadlineTime);
+        console.log("Deadline Uppdaterad");
+        break;
+      }
+      case 5: {
+        validChoice = true;
+        showMenu();
+        break;
+      }
+      default:
+        console.log("Det valet finns inte! Prova igen.");
     }
-    case 2: {
-      todo.status = "avslutad";
-      console.log("Status ändrad till avslutad");
-      break;
-    }
-    case 3: {
-      const newTitle = readline.question("\nAnge ett nytt namn: ");
-      todo.title = newTitle;
-      console.log(`\nTitle uppdaterad till: ${newTitle} `);
-      break;
-    }
-    case 4: {
-      const newDeadline = readline.question("\nAnge nytt datum (ÅÅÅÅ-MM-DD): ");
-      const newDeadlineTime = Date.parse(newDeadline);
-      todo.deadline = new Date(newDeadlineTime);
-      console.log("Deadline Uppdaterad");
-      break;
-    }
-    case 5: {
-      showMenu();
-      break;
-    }
-    default:
-      console.log("Det valet finns inte! Prova igen.");
   }
 }
