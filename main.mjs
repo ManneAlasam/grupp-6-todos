@@ -185,15 +185,15 @@ function updateToDo() {
         break;
       }
       case 3: {
-        const updatedTitle = readline.question("\nAnge ett nytt namn: ");
-        todo.title = updatedTitle;
-        console.log(`\nTitle uppdaterad till: ${updatedTitle} `);
+        const newTitle = readline.question("\nAnge ett nytt namn: ");
+        todo.title = newTitle;
+        console.log(`\nTitle uppdaterad till: ${newTitle} `);
         break;
       }
       case 4: {
-        const updatedDeadline = readline.question("\nAnge nytt datum (ÅÅÅÅ-MM-DD): ");
-        const nupdatedDeadlineTime = Date.parse(updatedDeadline);
-        todo.deadline = new Date(updatedDeadlineTime);
+        const newDeadline = readline.question("\nAnge nytt datum (ÅÅÅÅ-MM-DD): ");
+        const newDeadlineTime = Date.parse(newDeadline);
+        todo.deadline = new Date(newDeadlineTime);
         console.log("Deadline Uppdaterad");
         break;
       }
